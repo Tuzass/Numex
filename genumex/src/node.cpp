@@ -38,6 +38,8 @@ double OperationNode::evaluate() {
     case OperationToken::Division:
         return left->evaluate() / right->evaluate();
     }
+
+    return 0.0;
 }
 
 void OperationNode::clear() {

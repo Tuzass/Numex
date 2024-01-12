@@ -13,18 +13,21 @@ void Tree::clear() {
 void Tree::parse() {
     bool infix_possible{ true };
 
-    try { infixReading(); }
-    catch (Bad_expression& e) { infix_possible = false; }
+    infixReading();
+    for (const std::string& token : string_tokens) std::cout << token << std::endl;
 
-    if (infix_possible) return;
+    // try { infixReading(); }
+    // catch (Bad_expression& e) { infix_possible = false; }
 
-    try { postfixReading(); }
-    catch (Bad_expression& e) { std::cout << "Invalid expression!" << std::endl; }
+    // if (infix_possible) return;
+
+    // try { postfixReading(); }
+    // catch (Bad_expression& e) { std::cout << "Invalid expression!" << std::endl; }
 }
 
 std::string Tree::getToken(int& index) {
     using std::string;
-    string operators_string{ "+-*/" };
+    string operators_string{ "+-*/()" };
     string current_token{};
 
     for (; index < expression.size(); index++) {
@@ -49,7 +52,7 @@ std::string Tree::getToken(int& index) {
 
 bool Tree::validateToken(const std::string& token_string) {
     bool seenDot{ false };
-    std::string operators_string{ "+-*/" };
+    std::string operators_string{ "+-*/()" };
 
     if (token_string.size() == 1 && operators_string.find(token_string)) return true;
 
@@ -71,9 +74,11 @@ void Tree::infixReading() {
     std::string token_string = getToken(index);
 
     while (!token_string.empty()) {
-
         token_string = getToken(index);
+        if (validateToken(token_string)) tokens.push_back(token_string);
     }
+
+    string_tokens = tokens;
 }
 
 void Tree::postfixReading() {
@@ -81,5 +86,5 @@ void Tree::postfixReading() {
 }
 
 void Tree::build() {
-
+    parse();
 }

@@ -1,0 +1,21 @@
+.node-container{
+    height: 64px;
+    width: 64px;
+    min-width: 16px;
+    min-height: 16px;
+
+    border-radius: 100%;
+    border: 2px;
+    border-color: black;
+
+    background-color: #b3c8e4;
+
+}
+
+.node-token{
+    margin: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

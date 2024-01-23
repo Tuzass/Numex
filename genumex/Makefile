@@ -21,17 +21,20 @@ INC = -I$(INC_DIR)
 TARGET = $(BIN_DIR)/numex
 
 # Build rule
-all: $(TARGET)
+all: create_dirs $(TARGET)
 
 $(TARGET): $(OBJ)
-	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $(INC) $^ -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(INC) -c $< -o $@
+
+# Rule to create obj and bin directories
+create_dirs:
+	@if not exist $(OBJ_DIR) @mkdir $(OBJ_DIR)
+	@if not exist $(BIN_DIR) @mkdir $(BIN_DIR)
 
 # Clean rule
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
-
+	@if exist "$(OBJ_DIR)" rmdir /Q /S "$(OBJ_DIR)"
+	@if exist "$(BIN_DIR)" rmdir /Q /S "$(BIN_DIR)"

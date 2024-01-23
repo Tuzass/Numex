@@ -7,4 +7,6 @@ int main() {
 
     Tree t{ expression };
     t.build();
+
+    return 0;
 }

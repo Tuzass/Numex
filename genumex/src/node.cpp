@@ -1,12 +1,14 @@
 #include "../include/node.hpp"
 
+Node::~Node() { clear(); }
+
+void Node::clear() {};
+
 NumberNode::NumberNode(const NumberToken& nToken) :
     token{ nToken }, left{ nullptr }, right{ nullptr } {}
 
 NumberNode::NumberNode(const double& d) :
     token{ NumberToken{d} }, left{ nullptr }, right{ nullptr } {}
-
-NumberNode::~NumberNode() { clear(); }
 
 void NumberNode::clear() {
     if (left) left->clear();
@@ -24,8 +26,6 @@ OperationNode::OperationNode(const OperationToken& nToken) :
 
 OperationNode::OperationNode(const char& c) :
     token{ OperationToken{c} }, left{ nullptr }, right{ nullptr } {}
-
-OperationNode::~OperationNode() { clear(); }
 
 double OperationNode::evaluate() {
     switch (token.operation) {

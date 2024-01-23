@@ -11,7 +11,7 @@ class Tree {
 
     class Bad_expression {};
     void clear();
-    std::string getToken(int&);
+    std::string getToken(unsigned int&);
     bool validateToken(const std::string&);
     void infixReading();
     void postfixReading();

@@ -1,7 +1,7 @@
 #include "../include/tree.hpp"
 
 Tree::Tree(std::string str) :
-    expression{ str }, root{ nullptr } {}
+    root{ nullptr }, expression{ str } {}
 
 Tree::~Tree() { clear(); }
 
@@ -11,8 +11,9 @@ void Tree::clear() {
 }
 
 void Tree::parse() {
-    bool infix_possible{ true };
+    // bool infix_possible{ true };
 
+    std::cout << "test 0" << std::endl;
     infixReading();
     for (const std::string& token : string_tokens) std::cout << token << std::endl;
 
@@ -25,7 +26,7 @@ void Tree::parse() {
     // catch (Bad_expression& e) { std::cout << "Invalid expression!" << std::endl; }
 }
 
-std::string Tree::getToken(int& index) {
+std::string Tree::getToken(unsigned int& index) {
     using std::string;
     string operators_string{ "+-*/()" };
     string current_token{};
@@ -68,9 +69,9 @@ bool Tree::validateToken(const std::string& token_string) {
 
 void Tree::infixReading() {
     std::vector<std::string> tokens{};
-    bool number_last{ false };
-    bool seenDot{ false };
-    int index{ 0 };
+    // bool number_last{ false };
+    // bool seenDot{ false };
+    unsigned int index{ 0 };
     std::string token_string = getToken(index);
 
     while (!token_string.empty()) {
